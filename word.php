@@ -1,14 +1,14 @@
 <?php
 
-require_once('../pdfs/fpdf/fpdf.php');
-require_once('../pdfs/fpdi/fpdi.php');
+require_once('./fpdf/fpdf.php');
+require_once('./fpdi/fpdi.php');
 
 
-//产生文字水印
+//word_watermark
 $pdf = new FPDI();
 
 // get the page count
-$pageCount = $pdf->setSourceFile('22.pdf');
+$pageCount = $pdf->setSourceFile('more.pdf');
 
 // iterate through all pages
 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++)
@@ -26,15 +26,13 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++)
     // use the imported page
     $pdf->useTemplate($templateId);
 
-    // sign when last page
 
-        // sign with your name
-        $pdf->SetFont('Arial','B','12');
-        // sign with current date
-        $pdf->SetXY(0, 0); // you should keep testing untill you find out correct x,y values
-        $pdf->Write(7, date('Y-m-d'));
+    $pdf->SetFont('Arial','B','12');
+    // sign with current date
+    $pdf->SetXY(0, 0); // you should keep testing untill you find out correct x,y values
+    $pdf->Write(7, date('Y-m-d'));
 
 }
-$pdf->Output('success.pdf');
+$pdf->Output('word.pdf');
 
 
